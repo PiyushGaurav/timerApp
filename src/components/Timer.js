@@ -23,9 +23,7 @@ export default class Timer extends React.Component {
           styles.actionButtonStyle,
           {backgroundColor: isRunning ? 'red' : 'green'},
         ]}
-        onPress={() => {
-          alert('edit');
-        }}>
+        onPress={isRunning ? this.handleStopPress : this.handleStartPress}>
         <Image
           source={
             isRunning
@@ -65,6 +63,16 @@ export default class Timer extends React.Component {
       </TouchableOpacity>
     </View>
   );
+
+  handleStartPress = () => {
+    const {id, onStartPress} = this.props;
+    onStartPress(id);
+  };
+
+  handleStopPress = () => {
+    const {id, onStopPress} = this.props;
+    onStopPress(id);
+  };
 
   render() {
     const {title, elapsed} = this.props;

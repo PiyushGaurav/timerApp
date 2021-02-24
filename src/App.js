@@ -39,6 +39,24 @@ class App extends Component {
     clearInterval(this.intervalId);
   }
 
+  toggleTimer = (timerId) => {
+    this.setState((prevState) => {
+      const {timers} = prevState;
+      return {
+        timers: timers.map((timer) => {
+          const {id, isRunning} = timer;
+          if (id === timerId) {
+            return {
+              ...timer,
+              isRunning: !isRunning,
+            };
+          }
+          return timer;
+        }),
+      };
+    });
+  };
+
   render() {
     return (
       <View
@@ -51,6 +69,8 @@ class App extends Component {
             title={title}
             elapsed={elapsed}
             isRunning={isRunning}
+            onStartPress={this.toggleTimer}
+            onStopPress={this.toggleTimer}
           />
         ))}
       </View>
