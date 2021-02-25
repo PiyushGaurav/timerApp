@@ -55,7 +55,7 @@ class TimerListScreen extends Component {
         editable: false,
       },
     ]);
-    this.toggleAdd()
+    this.toggleAdd();
   };
 
   toggleAdd = () => {
@@ -73,15 +73,15 @@ class TimerListScreen extends Component {
           flex: 1,
         }}>
         <KeyboardAvoidingView behavior="padding">
-          {!this.props.timersData.timers.length ? (
-            <Empty />
-          ) : (
-            <ScrollView
-              style={{
-                paddingVertical: 10,
-                height: '100%',
-              }}>
-              {this.props.timersData.timers.map(
+          <ScrollView
+            style={{
+              paddingVertical: 10,
+              height: '100%',
+            }}>
+            {!this.props.timersData.timers.length ? (
+              <Empty />
+            ) : (
+              this.props.timersData.timers.map(
                 ({title, id, elapsed, isRunning, editable}) => (
                   <Timer
                     id={id}
@@ -93,9 +93,9 @@ class TimerListScreen extends Component {
                     onPause={this.toggleTimer}
                   />
                 ),
-              )}
-            </ScrollView>
-          )}
+              )
+            )}
+          </ScrollView>
         </KeyboardAvoidingView>
         {!this.state.addToggled && <AddTimer onAddTimer={this.onAddTimer} />}
         <TouchableOpacity onPress={this.toggleAdd} style={styles.addButton}>
