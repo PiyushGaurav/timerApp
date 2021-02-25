@@ -8,21 +8,22 @@ import {
   updateTimer,
 } from '../redux/events/timerActions';
 import {connect} from 'react-redux';
+import {formatMilliSeconds} from '../utils/TimerUtils';
+import PropTypes from 'prop-types';
 
 class Timer extends React.Component {
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    elapsed: PropTypes.number.isRequired,
+    isRunning: PropTypes.bool.isRequired,
+    editable: PropTypes.bool.isRequired,
+    onStart: PropTypes.func.isRequired,
+    onPause: PropTypes.func.isRequired,
+  }
   constructor(props) {
     super(props);
-    this.state = {
-      activeId: null,
-    };
   }
-
-  formatMilliSeconds = (ms) => {
-    const seconds = Math.floor((ms / 1000) % 60);
-    const minutes = Math.floor((ms / 1000 / 60) % 60);
-    const hours = Math.floor(ms / 1000 / 60 / 60);
-    return `${hours.toString()} : ${minutes.toString()} : ${seconds.toString()}`;
-  };
 
   renderActionButton() {
     const {isRunning} = this.props;
@@ -106,8 +107,8 @@ class Timer extends React.Component {
   };
 
   render() {
-    const {elapsed, editable, title} = this.props;
-    const elapsedString = this.formatMilliSeconds(elapsed);
+    const {elapsed, editable, title, isRunning} = this.props;
+    const elapsedString = formatMilliSeconds(elapsed);
     return (
       <View style={styles.timerContainer}>
         {editable ? (
@@ -121,7 +122,10 @@ class Timer extends React.Component {
         )}
         <View style={styles.section}>
           {this.renderActionButton()}
-          <Text style={styles.elapsedTime}>{elapsedString}</Text>
+          <Text
+            style={[styles.elapsedTime, {color: isRunning ? 'black' : 'grey'}]}>
+            {elapsedString}
+          </Text>
         </View>
       </View>
     );

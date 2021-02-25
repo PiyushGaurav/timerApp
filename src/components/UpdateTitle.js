@@ -31,7 +31,6 @@ class UpdateTitle extends Component {
           style={styles.textInput}
           autoCorrect
           autoFocus
-          underlineColorAndroid="blue"
           onChangeText={this.handleTitleChange}
           defaultValue={this.props.defaultValue}
           value={this.state.text}
@@ -69,9 +68,13 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   textInput: {
-    maxWidth: '70%',
-    height: 30,
+    width: '70%',
     fontSize: 25,
+    height: 50,
+    paddingHorizontal: 10,
+    borderRadius: 10,
+    borderBottomWidth: 1,
+    borderColor: 'grey',
     fontWeight: 'bold',
     color: 'blue',
     backgroundColor: 'white',

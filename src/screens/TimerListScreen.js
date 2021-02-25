@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import {
-  View,
-  ScrollView,
+  Image,
   KeyboardAvoidingView,
   SafeAreaView,
-  Text,
+  ScrollView,
   StyleSheet,
   TouchableOpacity,
-  Image,
 } from 'react-native';
 import Timer from '../components/Timer';
 import {addTimer, toggleTimer, updateTimer} from '../redux/events/timerActions';
@@ -20,7 +18,7 @@ class TimerListScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      addToggled: true,
+      isAddSectionClosed: true,
     };
   }
 
@@ -61,7 +59,7 @@ class TimerListScreen extends Component {
   toggleAdd = () => {
     this.setState((prevState) => {
       return {
-        addToggled: !prevState.addToggled,
+        isAddSectionClosed: !prevState.isAddSectionClosed,
       };
     });
   };
@@ -72,10 +70,10 @@ class TimerListScreen extends Component {
         style={{
           flex: 1,
         }}>
-        <KeyboardAvoidingView behavior="padding">
+        <KeyboardAvoidingView>
           <ScrollView
             style={{
-              paddingVertical: 10,
+              paddingVertical: 30,
               height: '100%',
             }}>
             {!this.props.timersData.timers.length ? (
@@ -97,11 +95,13 @@ class TimerListScreen extends Component {
             )}
           </ScrollView>
         </KeyboardAvoidingView>
-        {!this.state.addToggled && <AddTimer onAddTimer={this.onAddTimer} />}
+        {!this.state.isAddSectionClosed && (
+          <AddTimer onAddTimer={this.onAddTimer} />
+        )}
         <TouchableOpacity onPress={this.toggleAdd} style={styles.addButton}>
           <Image
             source={
-              this.state.addToggled
+              this.state.isAddSectionClosed
                 ? require('../assets/plus.png')
                 : require('../assets/cancel.png')
             }
