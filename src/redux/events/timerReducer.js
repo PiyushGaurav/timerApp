@@ -11,7 +11,7 @@ const initialState = {
     {
       id: 1,
       title: 'Timer 1',
-      elapsed: 5456099,
+      elapsed: 546099,
       isRunning: true,
       editable: false,
     },
@@ -32,7 +32,7 @@ const initialState = {
     {
       id: 4,
       title: 'Timer 4',
-      elapsed: 1273998,
+      elapsed: 273998,
       isRunning: false,
       editable: false,
     },

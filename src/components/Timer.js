@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 
 class Timer extends React.Component {
   static propTypes = {
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     elapsed: PropTypes.number.isRequired,
     isRunning: PropTypes.bool.isRequired,

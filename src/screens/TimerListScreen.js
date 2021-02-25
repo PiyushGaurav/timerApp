@@ -80,8 +80,9 @@ class TimerListScreen extends Component {
               <Empty />
             ) : (
               this.props.timersData.timers.map(
-                ({title, id, elapsed, isRunning, editable}) => (
+                ({title, id, elapsed, isRunning, editable}, index) => (
                   <Timer
+                    key={index}
                     id={id}
                     title={title}
                     elapsed={elapsed}
